@@ -1,0 +1,3 @@
+//match if a string is all digits
+//https://stackoverflow.com/questions/5439529/determine-if-a-string-is-an-integer-in-java
+str.matches("-?\\d+");
