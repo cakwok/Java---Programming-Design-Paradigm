@@ -8,8 +8,7 @@ public class Waterfowls extends Birds{
         this.bodyofWater = bodyofWater;
     }
     public String GetBodyofWater() {
-        return this.bodyofWater;
-
+        return GetName() + "live close to " + this.bodyofWater;
     }
 }
 

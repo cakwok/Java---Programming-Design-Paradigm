@@ -11,10 +11,10 @@ public class Parrots extends Birds{
         this.numWords = numWords;
         this.favSaying = favSaying;
     }
-    public int GetNumWords () {
-        return this.numWords;
+    public String GetNumWords () {
+        return GetName() + " can speak " + this.numWords + " words";
     }
     public String GetfavSaying () {
-        return this.favSaying;
+        return this.favSaying + " is " + GetName() + "' favorite saying";
     }
 }

@@ -4,7 +4,7 @@ public class flightlessBirds extends Birds{
         super(name, characteristics, food);
     }
     public String GetNumWings() {
-        return "no wing";
+        return GetName() + " have no wing";
     }
 
 }
