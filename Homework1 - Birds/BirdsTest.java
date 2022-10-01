@@ -2,7 +2,10 @@
 Wing Man Casca, Kwok
 CS5010 Assignment 1 - Birds
 */
+
 import org.junit.Before;
+
+import java.util.List;
 
 public class BirdsTest {
     private BirdsofPrey ospreys, hawks, eagles;
@@ -13,12 +16,15 @@ public class BirdsTest {
     private Waterfowls waterfowls;
 
     private Pigeons pigeons;
+    private int index = 0;
 
     @Before
     public void SetUp() {
         ospreys = new BirdsofPrey("ospreys", "sharp, hooked beaks with visible nostrils",
                 "small mammals, fish", true);
-        emus = new flightlessBirds("flightless Birds", "live on the ground and have no (or undeveloped) wings",
+        hawks = new BirdsofPrey("hawks", "sharp, hooked beaks with visible nostrils",
+                "small mammals, fish", true);
+        emus = new flightlessBirds("emus", "live on the ground and have no (or undeveloped) wings",
                 "vegetation, larvae");
         owls = new Owls("Owls", "facial disks that frame the eyes and bill", "small mammals, buds");
         parrots = new Parrots("parrots",
@@ -30,9 +36,8 @@ public class BirdsTest {
                 "wetlands, freshwater and saltwater shorelands, ocean");
         hornedPuffin = new Shorebirds("horned puffin", "live near water sources", "fish, larvae",
                 "wetlands, freshwater and saltwater shorelands, ocean\"");
-        waterfowls = new Waterfowls("waterfowls", " live near water sources", "fish, larvae",
+        waterfowls = new Waterfowls("waterfowls", "live near water sources", "fish, larvae",
                 "ducks, swans, and geese");
-
     }
 
     @org.junit.Test
@@ -48,5 +53,45 @@ public class BirdsTest {
         System.out.println(pigeons.extinct());
         System.out.println(greatAuks.GetBodyofWater());
         System.out.println(waterfowls.GetBodyofWater());
+        System.out.println(hornedPuffin.extinct());
+    }
+
+    @org.junit.Test
+    public void AssignAviary() {
+
+        //birdIndex[0] = new OtherAviary(ospreys);
+        //System.out.println(birdIndex[0].GetAviaryNum());
+
+       // AssignOtherAviary bird = new AssignOtherAviary(this.bird);
+
+        //Conservatory birdIndex[] = new Conservatory[100];
+        OtherAviary birdIndex[] = new OtherAviary[100];
+        FlightlessAviary birdIndex[] = new FlightlessAviary[100];
+        List<Birds> birds_list = List.of(ospreys, hawks, emus, hawks, hawks, hawks, hawks, hawks, hawks);
+        index = 0;
+
+        for (Birds var : birds_list) {
+            try {
+                birdIndex[index] = new OtherAviary(var);
+            }
+            catch (Exception e) {
+                try {
+                    birdIndex[index] = new FlightlessAviary(var);
+                }
+                catch (Exception e) {
+                    System.out.println("exception caught");
+                }
+            }
+            System.out.println(index);
+            System.out.println(var.GetName());
+            System.out.println("Occupancy: " + birdIndex[index].GetOccupancy());
+            System.out.println("Aviary assignment: " +  birdIndex[index].GetAviaryAssignment());
+            System.out.println("Location: " + birdIndex[index].GetLocation() + "\n");
+            index++;
+        }
+        System.out.println(birdIndex[2].GetLocation());
+        System.out.println(OtherAviary.GetDesc());
+
+
     }
 }
