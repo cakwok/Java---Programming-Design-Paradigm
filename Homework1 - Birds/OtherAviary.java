@@ -1,14 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlightlessAviary extends Conservatory{
+public class OtherAviary extends Conservatory{
     private static int occupancy = 0;
     private static int aviaryNum = 0;
     private String location;
     private static List<String> aviaryDesc = new ArrayList<String>();
-    public FlightlessAviary(Birds bird){
-
+    public OtherAviary(Birds bird){
         super(bird);
+
+        if (bird.getClass().equals(flightlessBirds.class)){
+            throw new IllegalArgumentException();
+        }
+
         occupancy ++;
 
         if (occupancy == 1) {
