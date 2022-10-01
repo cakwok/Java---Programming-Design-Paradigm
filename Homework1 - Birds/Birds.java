@@ -1,12 +1,13 @@
 /*
 Wing Man Casca, Kwok
-CS5010 Assignment 1 - Birds
+CS5010 Homework 1 - Birds
 */
-
+//Parent class to classify birds with characteristics, food, habitant, etc.
 public class Birds {
     private String name, characteristics, food;
     private boolean extinct;
 
+    //Constructor
     public Birds(String name, String characteristics, String food)  throws IllegalArgumentException{
         if ((name.matches("-?[0-9]+") || characteristics.matches("-?[0-9]+") ||
                 food.matches("-?[0-9]+"))){
@@ -17,6 +18,7 @@ public class Birds {
         this.food = food;
         this.extinct = false;
     }
+
     public String GetName() {
         return this.name;
     }
