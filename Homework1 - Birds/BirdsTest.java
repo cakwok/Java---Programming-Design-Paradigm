@@ -57,16 +57,28 @@ public class BirdsTest {
     }
 
     @org.junit.Test
+
     public void AssignAviary() {
 
-        //birdIndex[0] = new OtherAviary(ospreys);
-        //System.out.println(birdIndex[0].GetAviaryNum());
+        Conservatory birdIndex[] = new Conservatory[100];
+        List<Birds> birds_list = List.of(ospreys, hawks, emus, hawks, hawks, hawks, hawks, hawks, hawks);
+        index = 0;
 
-       // AssignOtherAviary bird = new AssignOtherAviary(this.bird);
+        for (Birds var : birds_list) {
+            birdIndex[index] = new Conservatory(var);
+            System.out.println(index);
+            System.out.println(var.GetName());
+            System.out.println(birdIndex[index].AssignAviary());
+            index++;
+        }
+        System.out.println(birdIndex[0].GetAviaryNum());
+        System.out.println(birdIndex[7].GetAviaryNum());
+    }
 
-        //Conservatory birdIndex[] = new Conservatory[100];
+/*
+    public void AssignAviary() {
+
         OtherAviary birdIndex[] = new OtherAviary[100];
-        FlightlessAviary birdIndex[] = new FlightlessAviary[100];
         List<Birds> birds_list = List.of(ospreys, hawks, emus, hawks, hawks, hawks, hawks, hawks, hawks);
         index = 0;
 
@@ -91,7 +103,8 @@ public class BirdsTest {
         }
         System.out.println(birdIndex[2].GetLocation());
         System.out.println(OtherAviary.GetDesc());
-
-
     }
+
+
+ */
 }
