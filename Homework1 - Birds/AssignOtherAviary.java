@@ -1,6 +1,5 @@
 import java.util.ArrayList;
-        import java.util.List;
-
+import java.util.List;
 public class AssignOtherAviary extends Conservatory{
     private static int occupancy = 0;
     private static int aviaryNum = 0;
