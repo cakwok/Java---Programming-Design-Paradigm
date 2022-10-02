@@ -1,3 +1,15 @@
-//match if a string is all digits
-//https://stackoverflow.com/questions/5439529/determine-if-a-string-is-an-integer-in-java
+match if a string is all digits
+https://stackoverflow.com/questions/5439529/determine-if-a-string-is-an-integer-in-java
+----------------------------------------------
 str.matches("-?\\d+");
+
+
+initialize a HashMap 
+https://www.baeldung.com/java-initialize-hashmap
+----------------------------------------------
+public static Map<String, String> articleMapOne;
+static {
+    articleMapOne = new HashMap<>();
+    articleMapOne.put("ar01", "Intro to Map");
+    articleMapOne.put("ar02", "Some article");
+}
