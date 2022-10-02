@@ -24,6 +24,8 @@ public class BirdsTest {
                 "small mammals, fish", true);
         hawks = new BirdsofPrey("hawks", "sharp, hooked beaks with visible nostrils",
                 "small mammals, fish", true);
+        eagles = new BirdsofPrey("eagles", "sharp, hooked beaks with visible nostrils",
+                "small mammals, fish", true);
         emus = new flightlessBirds("emus", "live on the ground and have no (or undeveloped) wings",
                 "vegetation, larvae");
         owls = new Owls("Owls", "facial disks that frame the eyes and bill", "small mammals, buds");
@@ -61,7 +63,7 @@ public class BirdsTest {
     public void AssignAviary() {
 
         Conservatory birdIndex[] = new Conservatory[100];
-        List<Birds> birds_list = List.of(ospreys, hawks, emus, hawks, hawks, hawks, hawks, hawks, hawks);
+        List<Birds> birds_list = List.of(ospreys, hawks, emus, eagles, hawks, hawks, hawks, hawks, hawks);
         index = 0;
 
         for (Birds var : birds_list) {
@@ -73,6 +75,10 @@ public class BirdsTest {
         }
         System.out.println(birdIndex[0].GetAviaryNum());
         System.out.println(birdIndex[7].GetAviaryNum());
+        //System.out.println(birdIndex[2].GetLocation());
+        System.out.println("OtherAviary Description: " + OtherAviary.GetDesc());
+        System.out.println("Get whole map of conservatory: " + Conservatory.GetMap());
+        System.out.println("Index: " + Conservatory.GetBirdIndex());
     }
 
 /*
@@ -101,8 +107,7 @@ public class BirdsTest {
             System.out.println("Location: " + birdIndex[index].GetLocation() + "\n");
             index++;
         }
-        System.out.println(birdIndex[2].GetLocation());
-        System.out.println(OtherAviary.GetDesc());
+
     }
 
 
