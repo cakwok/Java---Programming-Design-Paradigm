@@ -1,9 +1,9 @@
-match if a string is all digits     https://stackoverflow.com/questions/5439529/determine-if-a-string-is-an-integer-in-java
+match if a string is all digits                 https://stackoverflow.com/questions/5439529/determine-if-a-string-is-an-integer-in-java
 ----------------------------------------------
 str.matches("-?\\d+");
 
 
-initialize a HashMap                https://www.baeldung.com/java-initialize-hashmap
+initialize a dictionary(HashMap)                https://www.baeldung.com/java-initialize-hashmap
 ----------------------------------------------
 public static Map<String, String> articleMapOne;
 static {
@@ -12,7 +12,7 @@ static {
     articleMapOne.put("ar02", "Some article");
 }
 
-Sort a hashmap                       https://www.geeksforgeeks.org/sorting-hashmap-according-key-value-java/
+Sort a dictionary(HashMap)                      https://www.geeksforgeeks.org/sorting-hashmap-according-key-value-java/
 --------------------------------------------------------
 import java.util.*;
 class sortmapKey {
@@ -34,3 +34,8 @@ class sortmapKey {
             System.out.println("Key = " + entry.getKey() +
                          ", Value = " + entry.getValue());       
     }
+
+Create a list
+-----------------------------
+private Map<Birds, OtherAviary> map = new HashMap<>();
+map.put(this.bird, birdIndex[index]);
