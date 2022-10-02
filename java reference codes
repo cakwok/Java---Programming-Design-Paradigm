@@ -1,0 +1,36 @@
+match if a string is all digits     https://stackoverflow.com/questions/5439529/determine-if-a-string-is-an-integer-in-java
+----------------------------------------------
+str.matches("-?\\d+");
+
+
+initialize a HashMap                https://www.baeldung.com/java-initialize-hashmap
+----------------------------------------------
+public static Map<String, String> articleMapOne;
+static {
+    articleMapOne = new HashMap<>();
+    articleMapOne.put("ar01", "Intro to Map");
+    articleMapOne.put("ar02", "Some article");
+}
+
+Sort a hashmap                       https://www.geeksforgeeks.org/sorting-hashmap-according-key-value-java/
+--------------------------------------------------------
+import java.util.*;
+class sortmapKey {
+ 
+    // This map stores unsorted values
+    static Map<String, Integer> map = new HashMap<>();
+ 
+    // Function to sort map by Key
+    public static void sortbykey()
+    {
+        // TreeMap to store values of HashMap
+        TreeMap<String, Integer> sorted = new TreeMap<>();
+ 
+        // Copy all data from hashMap into TreeMap
+        sorted.putAll(map);
+ 
+        // Display the TreeMap which is naturally sorted
+        for (Map.Entry<String, Integer> entry : sorted.entrySet())
+            System.out.println("Key = " + entry.getKey() +
+                         ", Value = " + entry.getValue());       
+    }
