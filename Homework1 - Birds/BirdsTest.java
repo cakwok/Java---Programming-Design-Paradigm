@@ -70,11 +70,11 @@ public class BirdsTest {
             birdIndex[index] = new Conservatory(var);
             System.out.println(index);
             System.out.println(var.GetName());
-            System.out.println(birdIndex[index].AssignAviary());
+            System.out.println("Assigned bird into: " + birdIndex[index].AssignAviary());
             index++;
         }
-        System.out.println(birdIndex[0].GetAviaryNum());
-        System.out.println(birdIndex[7].GetAviaryNum());
+        System.out.println("look up aviary where a bird is in: " + birdIndex[0].GetAviaryAssignment());
+        System.out.println("look up aviary where a bird is in: " + birdIndex[2].GetAviaryAssignment());
         //System.out.println(birdIndex[2].GetLocation());
         System.out.println("OtherAviary Description: " + OtherAviary.GetDesc());
         System.out.println("Get whole map of conservatory: " + Conservatory.GetMap());
