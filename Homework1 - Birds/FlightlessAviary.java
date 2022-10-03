@@ -46,8 +46,8 @@ public class FlightlessAviary extends Conservatory{
     public static int GetNumAviary() {
         return aviaryNum;
     }
-    public static Map<String, ArrayList<String>> GetOtherAviaryMap() {
-        System.out.println("GetOtherAviaryMap: " + OtherAviaryMap);
+    public static Map<String, ArrayList<String>> GetAviaryMap() {
+        System.out.println("FlightlessbirdAviary Map: " + OtherAviaryMap);
         return OtherAviaryMap;
     }
 }

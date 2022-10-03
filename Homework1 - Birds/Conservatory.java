@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Conservatory {
     private Birds bird;
@@ -9,8 +6,10 @@ public class Conservatory {
 
     private OtherAviary OtherAviary_temp;
     private FlightlessAviary flightlessAviary_temp;
+    private BirdsofPreyAviary birdsOfPrey_temp;
+
     private String location;
-    private static int aviaryNum = 0;
+    private static int Count_birdsOfPrey, Count_flightlessBirds, Count_otherBirds;
 
     public Conservatory(Birds bird) throws IllegalArgumentException {
         if ((GetTotalNumAviary() > 20)) {
@@ -20,33 +19,43 @@ public class Conservatory {
     }
     public Map<String, ArrayList<String>> AssignAviary(){
         if (bird.getClass().equals(BirdsofPrey.class)) {
-            OtherAviary_temp = new OtherAviary(this.bird);
+            birdsOfPrey_temp = new BirdsofPreyAviary(this.bird);
             birdAviaryAssignment_map.put(this.bird.GetName(), new ArrayList<String>());
-            birdAviaryAssignment_map.get(this.bird.GetName()).add("OtherOvary" + aviaryNum);
-            birdAviaryAssignment_map.get(this.bird.GetName()).add(OtherAviary_temp.GetLocation());
+            birdAviaryAssignment_map.get(this.bird.GetName()).add(birdsOfPrey_temp.GetAviaryAssignment());
+            birdAviaryAssignment_map.get(this.bird.GetName()).add(birdsOfPrey_temp.GetLocation());
+            Count_birdsOfPrey ++;
+
         }
         else if (bird.getClass().equals(flightlessBirds.class)) {
             flightlessAviary_temp = new FlightlessAviary(this.bird);
             birdAviaryAssignment_map.put(this.bird.GetName(), new ArrayList<String>());
-            birdAviaryAssignment_map.get(this.bird.GetName()).add("flightlessovary" + aviaryNum);
+            birdAviaryAssignment_map.get(this.bird.GetName()).add(flightlessAviary_temp.GetAviaryAssignment());
             birdAviaryAssignment_map.get(this.bird.GetName()).add(flightlessAviary_temp.GetLocation());
+            Count_flightlessBirds ++;
+        }
+        else {
+            OtherAviary_temp = new OtherAviary(this.bird);
+            birdAviaryAssignment_map.put(this.bird.GetName(), new ArrayList<String>());
+            birdAviaryAssignment_map.get(this.bird.GetName()).add(OtherAviary_temp.GetAviaryAssignment());
+            birdAviaryAssignment_map.get(this.bird.GetName()).add(OtherAviary_temp.GetLocation());
+            Count_otherBirds ++;
         }
         return birdAviaryAssignment_map;
     }
     public String SearchAviaryAssignment() {
         return this.bird.GetName() + birdAviaryAssignment_map.get(this.bird.GetName());
     }
-    public static Map<String, ArrayList<String>> GetMap() {
-        return OtherAviary.GetOtherAviaryMap();
+    public static Dictionary GetMap() {
+        //return FlightlessAviary.GetAviaryMap() + "\n" + BirdsofPreyAviary.GetAviaryMap()  + "\n" + OtherAviary.GetAviaryMap();
+        return BirdsofPreyAviary.GetAviaryLocation();
     }
     public static Map<String, ArrayList<String>> GetBirdIndex() {
         TreeMap<String, ArrayList<String>> sorted_birdAssignment_map = new TreeMap<>();
         sorted_birdAssignment_map.putAll(birdAviaryAssignment_map);
         return sorted_birdAssignment_map;
     }
-    public int GetTotalNumAviary() {
-        //return OtherAviary.GetNumAviary();
-        return aviaryNum;
+    public static int GetTotalNumAviary() {
+        return OtherAviary.GetNumAviary() + FlightlessAviary.GetNumAviary() + BirdsofPreyAviary.GetNumAviary();
     }
     public void SetLocation(String locationHolder) {
         location = locationHolder;
@@ -54,11 +63,10 @@ public class Conservatory {
     public String GetLocation() {
         return location;
     }
-    public void SetAviaryNum(int num) {
-        aviaryNum = num;
-    }
-    public static int GetAviaryNum() {
-       return aviaryNum;
-    }
+
+    public static String CalculateFood() {
+        return "small mammals, fish: " + Count_birdsOfPrey +
+                "\nvegetation, larvae: " + Count_flightlessBirds;}
+
 
 }
