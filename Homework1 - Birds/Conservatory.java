@@ -6,11 +6,11 @@ import java.util.TreeMap;
 public class Conservatory {
     private Birds bird;
     private static Map<String, ArrayList<String>> birdAviaryAssignment_map = new HashMap<String, ArrayList<String>>();
-    private OtherAviary birdIndex[] = new OtherAviary[100];
-    private int index = 0;
+
     private OtherAviary OtherAviary_temp;
     private FlightlessAviary flightlessAviary_temp;
     private String location;
+    private static int aviaryNum = 0;
 
     public Conservatory(Birds bird) throws IllegalArgumentException {
         if ((GetTotalNumAviary() > 20)) {
@@ -22,18 +22,18 @@ public class Conservatory {
         if (bird.getClass().equals(BirdsofPrey.class)) {
             OtherAviary_temp = new OtherAviary(this.bird);
             birdAviaryAssignment_map.put(this.bird.GetName(), new ArrayList<String>());
-            birdAviaryAssignment_map.get(this.bird.GetName()).add(OtherAviary_temp.GetAviaryAssignment());
+            birdAviaryAssignment_map.get(this.bird.GetName()).add("OtherOvary" + aviaryNum);
             birdAviaryAssignment_map.get(this.bird.GetName()).add(OtherAviary_temp.GetLocation());
         }
         else if (bird.getClass().equals(flightlessBirds.class)) {
             flightlessAviary_temp = new FlightlessAviary(this.bird);
             birdAviaryAssignment_map.put(this.bird.GetName(), new ArrayList<String>());
-            birdAviaryAssignment_map.get(this.bird.GetName()).add(flightlessAviary_temp.GetAviaryAssignment());
+            birdAviaryAssignment_map.get(this.bird.GetName()).add("flightlessovary" + aviaryNum);
             birdAviaryAssignment_map.get(this.bird.GetName()).add(flightlessAviary_temp.GetLocation());
         }
         return birdAviaryAssignment_map;
     }
-    public String GetAviaryAssignment() {
+    public String SearchAviaryAssignment() {
         return this.bird.GetName() + birdAviaryAssignment_map.get(this.bird.GetName());
     }
     public static Map<String, ArrayList<String>> GetMap() {
@@ -45,7 +45,8 @@ public class Conservatory {
         return sorted_birdAssignment_map;
     }
     public int GetTotalNumAviary() {
-        return OtherAviary.GetNumAviary();
+        //return OtherAviary.GetNumAviary();
+        return aviaryNum;
     }
     public void SetLocation(String locationHolder) {
         location = locationHolder;
@@ -53,8 +54,11 @@ public class Conservatory {
     public String GetLocation() {
         return location;
     }
-
-
-
+    public void SetAviaryNum(int num) {
+        aviaryNum = num;
+    }
+    public static int GetAviaryNum() {
+       return aviaryNum;
+    }
 
 }

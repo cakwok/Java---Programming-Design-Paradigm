@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 public class FlightlessAviary extends Conservatory{
     private static int occupancy = 0;
     private static int aviaryNum = 0;
@@ -25,29 +24,24 @@ public class FlightlessAviary extends Conservatory{
 
         occupancy ++;
 
-        if (occupancy == 1) {
-            aviaryDesc.add(bird.GetCharacteristics());
-        }
-
         if (occupancy % 5 == 1) {
             aviaryNum ++;
         }
 
         SetLocation(String.valueOf(aviaryNum) + " Floor");
 
-        OtherAviaryMap.get(GetLocation()).add(GetAviaryAssignment());
+        OtherAviaryMap.get(GetLocation()).add("FlightlessAviary" + aviaryNum);
         OtherAviaryMap.get(GetLocation()).add(bird.GetName());
 
-        if (aviaryDesc.contains(bird.GetCharacteristics()) == false) {
+        if (occupancy == 1 || aviaryDesc.contains(bird.GetCharacteristics()) == false) {
             aviaryDesc.add(bird.GetCharacteristics());
         }
     }
-
-    public static List<String> GetDesc() {
-        return aviaryDesc;
-    }
     public String GetAviaryAssignment() {
         return "FlightlessAviary" + aviaryNum;
+    }
+    public static List<String> GetDesc() {
+        return aviaryDesc;
     }
     public static int GetNumAviary() {
         return aviaryNum;
@@ -57,3 +51,5 @@ public class FlightlessAviary extends Conservatory{
         return OtherAviaryMap;
     }
 }
+
+

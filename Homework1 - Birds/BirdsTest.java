@@ -73,12 +73,12 @@ public class BirdsTest {
             System.out.println("Assigned bird into: " + birdIndex[index].AssignAviary());
             index++;
         }
-        System.out.println("look up aviary where a bird is in: " + birdIndex[0].GetAviaryAssignment());
-        System.out.println("look up aviary where a bird is in: " + birdIndex[2].GetAviaryAssignment());
-        //System.out.println(birdIndex[2].GetLocation());
+        System.out.println("look up aviary where a bird is in: " + birdIndex[0].SearchAviaryAssignment());
+        System.out.println("look up aviary where a bird is in: " + birdIndex[2].SearchAviaryAssignment());
         System.out.println("OtherAviary Description: " + OtherAviary.GetDesc());
         System.out.println("Get whole map of conservatory: " + Conservatory.GetMap());
         System.out.println("Index: " + Conservatory.GetBirdIndex());
+        System.out.println("Total Aviaries: " + Conservatory.GetAviaryNum());
     }
 
 /*
