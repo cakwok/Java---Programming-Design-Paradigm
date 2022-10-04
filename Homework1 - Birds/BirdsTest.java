@@ -1,26 +1,32 @@
 /*
 Wing Man Casca, Kwok
-CS5010 Assignment 1 - Birds
+CS5010 Homework 1 - Birds
 */
-
+//Test code to test part 1 and part 2
 import org.junit.Before;
 
 import java.util.List;
 
 public class BirdsTest {
     private BirdsofPrey ospreys, hawks, eagles;
-    private flightlessBirds emus;
+    private flightlessBirds emus, kiwis;
     private Owls owls;
     private Parrots parrots;
-    private Shorebirds greatAuks, hornedPuffin;
-    private Waterfowls waterfowls;
-
     private Pigeons pigeons;
+    private Shorebirds greatAuks, hornedPuffin, africanJacana;
+    private Waterfowls ducks, swans,  geese;
     private int index = 0;
 
+    //Initialize bird objects and assign characteristics
     @Before
     public void SetUp() {
         ospreys = new BirdsofPrey("ospreys", "sharp, hooked beaks with visible nostrils",
+                "small mammals, fish", false);
+        hawks = new BirdsofPrey("hawks", "sharp, hooked beaks with visible nostrils",
+                "small mammals, fish", false);
+        hawks = new BirdsofPrey("hawks", "sharp, hooked beaks with visible nostrils",
+                "small mammals, fish", false);
+        hawks = new BirdsofPrey("hawks", "sharp, hooked beaks with visible nostrils",
                 "small mammals, fish", false);
         hawks = new BirdsofPrey("hawks", "sharp, hooked beaks with visible nostrils",
                 "small mammals, fish", false);
@@ -28,21 +34,29 @@ public class BirdsTest {
                 "small mammals, fish", true);
         emus = new flightlessBirds("emus", "live on the ground and have no (or undeveloped) wings",
                 "vegetation, larvae");
-        owls = new Owls("Owls", "facial disks that frame the eyes and bill", "small mammals, buds");
+        kiwis = new flightlessBirds("kiwis", "live on the ground and have no (or undeveloped) wings",
+                "vegetation, larvae");
+        owls = new Owls("owls", "facial disks that frame the eyes and bill", "small mammals, buds");
         parrots = new Parrots("parrots",
                 "short, curved beak and are known for their intelligence and ability to mimic sounds",
                 "nuts, vegetation", 20, "Hello");
         pigeons = new Pigeons("pigeons", "feeding their young bird milk very similar to the milk of mammals",
-                "nuts, vegetation, buds", true);
+                "nuts, vegetation, buds", false);
         greatAuks = new Shorebirds("great guk", "live near water sources", "fish, larvae",
                 "wetlands, freshwater and saltwater shorelands, ocean");
         hornedPuffin = new Shorebirds("horned puffin", "live near water sources", "fish, larvae",
-                "wetlands, freshwater and saltwater shorelands, ocean\"");
-        waterfowls = new Waterfowls("waterfowls", "live near water sources", "fish, larvae",
-                "ducks, swans, and geese");
-
+                "wetlands, freshwater and saltwater shorelands, ocean");
+        africanJacana= new Shorebirds("horned puffin", "live near water sources", "fish, larvae",
+                "wetlands, freshwater and saltwater shorelands, ocean");
+        ducks = new Waterfowls("ducks", "live near water sources", "fish, larvae",
+                "lake, pound");
+        swans = new Waterfowls("swans", "live near water sources", "fish, larvae",
+                "lake, pound");
+        geese = new Waterfowls("geese", "live near water sources", "fish, larvae",
+                "lake, pound");
     }
 
+    //Test code for part 1, to test classifying birds and test if result matches expected result
     @org.junit.Test
     public void Classify() {
         System.out.println("Part 1 - Classification\n");
@@ -56,35 +70,35 @@ public class BirdsTest {
         System.out.println(owls.GetCharacteristics());
         System.out.println(pigeons.extinct());
         System.out.println(greatAuks.GetBodyofWater());
-        System.out.println(waterfowls.GetBodyofWater());
+        System.out.println(ducks.GetBodyofWater());
         System.out.println(hornedPuffin.extinct());
     }
 
-    @org.junit.Test
+    //Test code for part 2, to test assigning birds and test if result matches expected result
+    // @params birdIndex              bird holder to create new Conservatory instance
+    // @params birds_list             a list to hold bird objects
+    // @params birds_list_string      a list to hold bird name in string
+    // @params index                  to locate position in the birds_list and birds_list_string lists
 
+    @org.junit.Test
     public void AssignAviary() {
 
         System.out.println("Part 2 - Assign birds into conservatory\n");
 
         Conservatory birdIndex[] = new Conservatory[100];
-        List<Birds> birds_list = List.of(ospreys, hawks, emus, eagles, hawks, hawks, hawks, hawks, hawks, parrots,
-                pigeons, pigeons, waterfowls, greatAuks, hornedPuffin,owls);
+        List<Birds> birds_list = List.of(ospreys, hawks, emus, eagles, hawks, hawks, hawks, hawks, hawks, parrots, pigeons, pigeons, ducks, greatAuks, hornedPuffin, owls, emus, kiwis, pigeons, greatAuks, africanJacana, owls, emus, kiwis, pigeons, owls, emus, kiwis, pigeons,parrots);
+        List<String> birds_list_string = List.of("osprey1", "hawk1", "emus1", "eagle1", "hawk2", "hawk3", "hawk4", "hawk5", "hawk6", "parrot1", "pigeon1", "pigeon2", "duck1", "greatAuk1", "hornedPuffin1", "owl1", "emus2", "kiwi1", "pigeon3", "greatAuk2", "africanJacana", "owl2", "emus3", "kiwi2", "pigeon4", "owl3", "emus4", "kiwi3", "pigeon5", "parrot2");
         index = 0;
 
-        for (Birds var : birds_list) {
+        for (int i = 0; i<=birds_list.size(); i++) {
             try {
-                birdIndex[index] = new Conservatory(var);
+                birdIndex[index] = new Conservatory(birds_list.get(i), birds_list_string.get(i));
                 birdIndex[index].AssignAviary();
                 index++;
             }
             catch (Exception e){
+                System.out.println(e);
             }
-            /*
-            System.out.println(index);
-            System.out.println(var.GetName());
-            System.out.println("Assigned bird into: " + birdIndex[index].AssignAviary());
-            */
-
         }
         System.out.println("\nFood required and quantity:\n----------------\n" + Conservatory.CalculateFood());
         System.out.println("\nlook up aviary where " +  birdIndex[0] + " is in: " + birdIndex[0].SearchAviaryAssignment());
@@ -95,40 +109,5 @@ public class BirdsTest {
         Conservatory.GetMap();
         System.out.println("\nIndex: " + Conservatory.GetBirdIndex());
         System.out.println("\nTotal aviaries: " + Conservatory.GetTotalNumAviary());
-        //System.out.println("New aviary location: " + BirdsofPreyAviary.GetAviaryLocation());
-
-
     }
-
-/*
-    public void AssignAviary() {
-
-        OtherAviary birdIndex[] = new OtherAviary[100];
-        List<Birds> birds_list = List.of(ospreys, hawks, emus, hawks, hawks, hawks, hawks, hawks, hawks);
-        index = 0;
-
-        for (Birds var : birds_list) {
-            try {
-                birdIndex[index] = new OtherAviary(var);
-            }
-            catch (Exception e) {
-                try {
-                    birdIndex[index] = new FlightlessAviary(var);
-                }
-                catch (Exception e) {
-                    System.out.println("exception caught");
-                }
-            }
-            System.out.println(index);
-            System.out.println(var.GetName());
-            System.out.println("Occupancy: " + birdIndex[index].GetOccupancy());
-            System.out.println("Aviary assignment: " +  birdIndex[index].GetAviaryAssignment());
-            System.out.println("Location: " + birdIndex[index].GetLocation() + "\n");
-            index++;
-        }
-
-    }
-
-
- */
 }
