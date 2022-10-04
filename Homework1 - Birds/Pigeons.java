@@ -4,8 +4,8 @@ public class Pigeons extends Birds{
         super(name, characteristics, food);
         this.extinct = extinct;
     }
-    public String extinct() {
-        return GetName() + " is extinct - " + this.extinct;
+    public boolean extinct() {
+        return this.extinct;
     }
 }
 

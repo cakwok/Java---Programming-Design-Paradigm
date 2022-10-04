@@ -1,26 +1,17 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 public class OtherAviary extends Conservatory{
     private static int occupancy = 0;
     private static int aviaryNum = 0;
     //private String location;
     private static List<String> aviaryDesc = new ArrayList<String>();
 
-    private static Map<String, ArrayList<String>> OtherAviaryMap;
-    static {
-        OtherAviaryMap = new HashMap<String, ArrayList<String>>();
-        OtherAviaryMap.put("1 Floor", new ArrayList<String>());
-        OtherAviaryMap.put("2 Floor", new ArrayList<String>());
-    }
     public OtherAviary(Birds bird){
 
         super(bird);
 
-        if (bird.getClass().equals(flightlessBirds.class)){
-            throw new IllegalArgumentException();
+        if (bird.getClass().equals(BirdsofPrey.class) || bird.getClass().equals(flightlessBirds.class) ||
+                bird.getClass().equals(Waterfowls.class) ){
+            throw new IllegalArgumentException(bird.getClass() + " cannot mix with other birds.");
         }
 
         occupancy ++;
@@ -30,9 +21,7 @@ public class OtherAviary extends Conservatory{
         }
 
         SetLocation(String.valueOf(aviaryNum) + " Floor");
-
-        OtherAviaryMap.get(GetLocation()).add("OtherAviary" + aviaryNum);
-        OtherAviaryMap.get(GetLocation()).add(bird.GetName());
+        Set_map_aviary_bird("OtherAviary" + aviaryNum);
 
         if (occupancy == 1 || aviaryDesc.contains(bird.GetCharacteristics()) == false) {
             aviaryDesc.add(bird.GetCharacteristics());
@@ -48,8 +37,8 @@ public class OtherAviary extends Conservatory{
     public static int GetNumAviary() {
         return aviaryNum;
     }
-    public static Map<String, ArrayList<String>> GetAviaryMap() {
-        System.out.println("GetOtherAviaryMap: " + OtherAviaryMap);
-        return OtherAviaryMap;
-    }
+
 }
+
+
+

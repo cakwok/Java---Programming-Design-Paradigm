@@ -31,8 +31,8 @@ public class Birds {
     public String GetFood() {
         return this.name + " eat " + this.food;
     }
-    public String extinct() {
-        return this.name + " is extinct - " + this.extinct;
+    public boolean extinct() {
+        return this.extinct;
     }
 
 

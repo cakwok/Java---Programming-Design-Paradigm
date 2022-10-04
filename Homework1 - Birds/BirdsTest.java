@@ -21,9 +21,9 @@ public class BirdsTest {
     @Before
     public void SetUp() {
         ospreys = new BirdsofPrey("ospreys", "sharp, hooked beaks with visible nostrils",
-                "small mammals, fish", true);
+                "small mammals, fish", false);
         hawks = new BirdsofPrey("hawks", "sharp, hooked beaks with visible nostrils",
-                "small mammals, fish", true);
+                "small mammals, fish", false);
         eagles = new BirdsofPrey("eagles", "sharp, hooked beaks with visible nostrils",
                 "small mammals, fish", true);
         emus = new flightlessBirds("emus", "live on the ground and have no (or undeveloped) wings",
@@ -40,10 +40,12 @@ public class BirdsTest {
                 "wetlands, freshwater and saltwater shorelands, ocean\"");
         waterfowls = new Waterfowls("waterfowls", "live near water sources", "fish, larvae",
                 "ducks, swans, and geese");
+
     }
 
     @org.junit.Test
     public void Classify() {
+        System.out.println("Part 1 - Classification\n");
         System.out.println(ospreys.GetCharacteristics());
         System.out.println(ospreys.extinct());
         System.out.println(ospreys.GetNumWings());
@@ -62,26 +64,38 @@ public class BirdsTest {
 
     public void AssignAviary() {
 
+        System.out.println("Part 2 - Assign birds into conservatory\n");
+
         Conservatory birdIndex[] = new Conservatory[100];
-        List<Birds> birds_list = List.of(ospreys, hawks, emus, eagles, hawks, hawks, hawks, hawks, hawks);
+        List<Birds> birds_list = List.of(ospreys, hawks, emus, eagles, hawks, hawks, hawks, hawks, hawks, parrots,
+                pigeons, pigeons, waterfowls, greatAuks, hornedPuffin,owls);
         index = 0;
 
         for (Birds var : birds_list) {
-            birdIndex[index] = new Conservatory(var);
+            try {
+                birdIndex[index] = new Conservatory(var);
+                birdIndex[index].AssignAviary();
+                index++;
+            }
+            catch (Exception e){
+            }
+            /*
             System.out.println(index);
             System.out.println(var.GetName());
             System.out.println("Assigned bird into: " + birdIndex[index].AssignAviary());
-            index++;
+            */
+
         }
-        System.out.println("Food needed and quantity:\n" + Conservatory.CalculateFood());
-        System.out.println("look up aviary where a bird is in: " + birdIndex[0].SearchAviaryAssignment());
-        System.out.println("look up aviary where a bird is in: " + birdIndex[2].SearchAviaryAssignment());
-        System.out.println("FlightlessAviary Description: " + FlightlessAviary.GetDesc());
-        System.out.println("BirdsofPreyAviary Description: " + BirdsofPreyAviary.GetDesc());
-        System.out.println("Get whole map of conservatory: " + Conservatory.GetMap());
-        System.out.println("Index: " + Conservatory.GetBirdIndex());
-        System.out.println("Total aviaries: " + Conservatory.GetTotalNumAviary());
-        System.out.println("New aviary location: " + BirdsofPreyAviary.GetAviaryLocation());
+        System.out.println("\nFood required and quantity:\n----------------\n" + Conservatory.CalculateFood());
+        System.out.println("\nlook up aviary where " +  birdIndex[0] + " is in: " + birdIndex[0].SearchAviaryAssignment());
+        System.out.println("\nlook up aviary where " +  birdIndex[2] + " is in: " + birdIndex[2].SearchAviaryAssignment());
+        System.out.println("\nFlightlessAviary Description: " + FlightlessAviary.GetDesc());
+        System.out.println("\nBirdsofPreyAviary Description: " + BirdsofPreyAviary.GetDesc());
+        System.out.println("\nGet whole map of conservatory:\n----------------\n");
+        Conservatory.GetMap();
+        System.out.println("\nIndex: " + Conservatory.GetBirdIndex());
+        System.out.println("\nTotal aviaries: " + Conservatory.GetTotalNumAviary());
+        //System.out.println("New aviary location: " + BirdsofPreyAviary.GetAviaryLocation());
 
 
     }

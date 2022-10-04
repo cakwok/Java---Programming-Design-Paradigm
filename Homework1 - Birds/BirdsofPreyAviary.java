@@ -6,8 +6,8 @@ public class BirdsofPreyAviary extends Conservatory{
     //private String location;
     private static List<String> aviaryDesc = new ArrayList<String>();
 
-    private static Dictionary<String, String> aviaryLocation = new Hashtable<>();
-    private static Dictionary<String, String> aviaryName = new Hashtable<>();
+
+
 
     public BirdsofPreyAviary(Birds bird){
 
@@ -25,13 +25,7 @@ public class BirdsofPreyAviary extends Conservatory{
 
         SetLocation(String.valueOf(aviaryNum) + " Floor");
 
-        if (aviaryName.get("BirdsofPreyAviary" + aviaryNum) != null ) {
-            aviaryName.put("BirdsofPreyAviary" + aviaryNum, aviaryName.get("BirdsofPreyAviary" + aviaryNum) + " , " + bird.GetName());
-        }
-        else {
-            aviaryName.put("BirdsofPreyAviary" + aviaryNum, bird.GetName());
-            aviaryLocation.put(GetLocation(), aviaryName.toString());
-        }
+        Set_map_aviary_bird("OtherAviary" + aviaryNum);
 
         if (occupancy == 1 || aviaryDesc.contains(bird.GetCharacteristics()) == false) {
             aviaryDesc.add(bird.GetCharacteristics());
@@ -46,15 +40,6 @@ public class BirdsofPreyAviary extends Conservatory{
     }
     public static int GetNumAviary() {
         return aviaryNum;
-    }
-    /*
-    public static Map<String, ArrayList<String>> GetAviaryMap() {
-        System.out.println("GetBirdsofPreyAviaryMap: " + OtherAviaryMap);
-        return OtherAviaryMap;
-    }
-     */
-    public static Dictionary GetAviaryLocation() {
-        return aviaryLocation;
     }
 
 }
