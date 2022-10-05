@@ -34,6 +34,13 @@ static {
     articleMapOne.put("ar02", "Some article");
 }
 
+Get value from key of hashmap                   https://www.geeksforgeeks.org/iterate-map-java/
+----------------------------------------------
+Map<String,String> gfg = new HashMap<String,String>();
+
+for (String name : gfg.keySet()) 
+    System.out.println("key: " + name);
+
 Sort a dictionary(HashMap)                      https://www.geeksforgeeks.org/sorting-hashmap-according-key-value-java/
 --------------------------------------------------------
 import java.util.*;
