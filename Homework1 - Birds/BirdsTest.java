@@ -61,21 +61,21 @@ public class BirdsTest {
     public void Classify() {
         System.out.println("Part 1 - Classification\n");
         System.out.println(ospreys.GetCharacteristics());
-        System.out.println(ospreys.extinct());
+        System.out.println("ospreys are extinct: " + ospreys.extinct());
         System.out.println(ospreys.GetNumWings());
         System.out.println(ospreys.GetFood());
         System.out.println(emus.GetNumWings());
         System.out.println(parrots.GetNumWords());
         System.out.println(parrots.GetfavSaying());
         System.out.println(owls.GetCharacteristics());
-        System.out.println(pigeons.extinct());
+        System.out.println("pigeons are extinct: " + pigeons.extinct());
         System.out.println(greatAuks.GetBodyofWater());
         System.out.println(ducks.GetBodyofWater());
-        System.out.println(hornedPuffin.extinct());
+        System.out.println("hornedPuffin is extinct: " + hornedPuffin.extinct());
     }
 
     //Test code for part 2, to test assigning birds and test if result matches expected result
-    // @params birdIndex              bird holder to create new Conservatory instance
+    // @params birdIndex[]              bird holder to create new Conservatory instance
     // @params birds_list             a list to hold bird objects
     // @params birds_list_string      a list to hold bird name in string
     // @params index                  to locate position in the birds_list and birds_list_string lists
@@ -90,7 +90,9 @@ public class BirdsTest {
         List<String> birds_list_string = List.of("osprey1", "hawk1", "emus1", "eagle1", "hawk2", "hawk3", "hawk4", "hawk5", "hawk6", "parrot1", "pigeon1", "pigeon2", "duck1", "greatAuk1", "hornedPuffin1", "owl1", "emus2", "kiwi1", "pigeon3", "greatAuk2", "africanJacana", "owl2", "emus3", "kiwi2", "pigeon4", "owl3", "emus4", "kiwi3", "pigeon5", "parrot2");
         index = 0;
 
-        for (int i = 0; i<=birds_list.size(); i++) {
+        //Test case 1: Normal
+        System.out.println("Test case1: normal");
+        for (int i = 0; i<birds_list.size(); i++) {
             try {
                 birdIndex[index] = new Conservatory(birds_list.get(i), birds_list_string.get(i));
                 birdIndex[index].AssignAviary();
@@ -101,13 +103,22 @@ public class BirdsTest {
             }
         }
         System.out.println("\nFood required and quantity:\n----------------\n" + Conservatory.CalculateFood());
-        System.out.println("\nlook up aviary where " +  birdIndex[0] + " is in: " + birdIndex[0].SearchAviaryAssignment());
-        System.out.println("\nlook up aviary where " +  birdIndex[2] + " is in: " + birdIndex[2].SearchAviaryAssignment());
-        System.out.println("\nFlightlessAviary Description: " + FlightlessAviary.GetDesc());
-        System.out.println("\nBirdsofPreyAviary Description: " + BirdsofPreyAviary.GetDesc());
-        System.out.println("\nGet whole map of conservatory:\n----------------\n");
-        Conservatory.GetMap();
-        System.out.println("\nIndex: " + Conservatory.GetBirdIndex());
-        System.out.println("\nTotal aviaries: " + Conservatory.GetTotalNumAviary());
+        System.out.println("\nLook up where a bird is in:\n----------------\n" + birds_list_string.get(0) + " is in: " + birdIndex[0].SearchAviaryAssignment());
+        System.out.println("\nLook up where a bird is in:\n----------------\n" + birds_list_string.get(2) + " is in: " + birdIndex[2].SearchAviaryAssignment());
+        System.out.println("\nFlightlessAviary Description:\n----------------\n " + FlightlessAviary.GetDesc());
+        System.out.println("\nBirdsofPreyAviary Description:\n----------------\n" + BirdsofPreyAviary.GetDesc());
+        System.out.println("\nGet whole map of conservatory:\n----------------\n" + Conservatory.GetMap());
+        System.out.println("\nIndex:\n----------------\n" + Conservatory.GetBirdIndex());
+        System.out.println("\nTotal aviaries:\n----------------\n" + Conservatory.GetTotalNumAviary());
+
+        //Test case 2: >100 birds
+        System.out.println("\nTest case 2 - aviaries > 20 \n");
+        System.out.println("Total birds added to conservatory in previous case: " + (index + 1));
+        for (int i = 0; i<=100; i++) {
+            System.out.println("adding the " + (index + 2) + " bird");
+            birdIndex[index] = new Conservatory(ospreys, "osprey1");
+            birdIndex[index].AssignAviary();
+            index++;
+        }
     }
 }

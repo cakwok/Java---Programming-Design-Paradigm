@@ -10,16 +10,17 @@ import java.util.*;
 
 public class Conservatory {
     private Birds bird;
-    private static Map<String, ArrayList<String>> birdAviaryAssignment_map = new HashMap<String, ArrayList<String>>();
-    private OtherAviary OtherAviary_temp;
-    private FlightlessAviary flightlessAviary_temp;
-    private BirdsofPreyAviary birdsOfPrey_temp;
-    private WaterFowlAviary waterFowlAviary_temp;
+    private OtherAviary otherAviary;
+    private FlightlessAviary flightlessAviary;
+    private BirdsofPreyAviary birdsOfPrey;
+    private WaterFowlAviary waterFowlAviary;
     private String location;
     String bird_name;
     private static int Count_birdsOfPrey, Count_flightlessBirds, Count_otherBirds, Count_waterFowl;
-    private static Map<String, ArrayList<String>> map_aviary_bird = new HashMap<String, ArrayList<String>> ();
-    private static Map<String, String> map_aviary_location = new HashMap<String, String>();
+    private static Map<String, ArrayList<String>> birdAviaryAssignment_map = new HashMap<String, ArrayList<String>>();  // {birdname: aviary, location}
+    private static Map<String, ArrayList<String>> map_aviary_bird = new HashMap<String, ArrayList<String>> ();          // {aviary: birds}
+    private static Map<String, String> map_aviary_location = new HashMap<String, String>();                             // {aviary: location}
+    private static Map<String, ArrayList<String>> map_aviary_location_bird = new HashMap<String, ArrayList<String>>();  // {aviary: location, birds}
 
     /*
     Constructor
@@ -29,13 +30,14 @@ public class Conservatory {
      */
     public Conservatory(Birds bird, String bird_name) throws IllegalArgumentException {
         if ((GetTotalNumAviary() > 20)) {
-            throw new IllegalArgumentException("More than 20 aviaries");
+            throw new IllegalArgumentException("Attempted to create " + GetTotalNumAviary() + " aviaries.  More than 20 aviaries is not allowed");
         }
         if (bird.extinct()) {
-            throw new IllegalArgumentException(bird.getClass() + " is extinct and cannot put int avaries.");
+            throw new IllegalArgumentException(bird_name + " is extinct and cannot put int aviaries.");
         }
         this.bird = bird;
         this.bird_name = bird_name;
+        this.location = location;
     }
 
     /*
@@ -46,34 +48,34 @@ public class Conservatory {
      */
     public Map<String, ArrayList<String>> AssignAviary() {
         try {
-            birdsOfPrey_temp = new BirdsofPreyAviary(this.bird, this.bird_name);
+            birdsOfPrey = new BirdsofPreyAviary(this.bird, this.bird_name);
             birdAviaryAssignment_map.put(this.bird_name, new ArrayList<String>());
-            birdAviaryAssignment_map.get(this.bird_name).add(birdsOfPrey_temp.GetAviaryAssignment());
-            birdAviaryAssignment_map.get(this.bird_name).add(birdsOfPrey_temp.GetLocation());
+            birdAviaryAssignment_map.get(this.bird_name).add(birdsOfPrey.GetAviaryAssignment());
+            birdAviaryAssignment_map.get(this.bird_name).add(birdsOfPrey.GetLocation());
             Count_birdsOfPrey++;
         } catch (Exception f) {
             System.out.println(f);
             try {
-                flightlessAviary_temp = new FlightlessAviary(this.bird, this.bird_name);
+                flightlessAviary = new FlightlessAviary(this.bird, this.bird_name);
                 birdAviaryAssignment_map.put(this.bird_name, new ArrayList<String>());
-                birdAviaryAssignment_map.get(this.bird_name).add(flightlessAviary_temp.GetAviaryAssignment());
-                birdAviaryAssignment_map.get(this.bird_name).add(flightlessAviary_temp.GetLocation());
+                birdAviaryAssignment_map.get(this.bird_name).add(flightlessAviary.GetAviaryAssignment());
+                birdAviaryAssignment_map.get(this.bird_name).add(flightlessAviary.GetLocation());
                 Count_flightlessBirds++;
             } catch (Exception g) {
                 System.out.println(g);
                 try {
-                    waterFowlAviary_temp = new WaterFowlAviary(this.bird, this.bird_name);
+                    waterFowlAviary = new WaterFowlAviary(this.bird, this.bird_name);
                     birdAviaryAssignment_map.put(this.bird_name, new ArrayList<String>());
-                    birdAviaryAssignment_map.get(this.bird_name).add(waterFowlAviary_temp.GetAviaryAssignment());
-                    birdAviaryAssignment_map.get(this.bird_name).add(waterFowlAviary_temp.GetLocation());
+                    birdAviaryAssignment_map.get(this.bird_name).add(waterFowlAviary.GetAviaryAssignment());
+                    birdAviaryAssignment_map.get(this.bird_name).add(waterFowlAviary.GetLocation());
                     Count_waterFowl++;
                 } catch (Exception h) {
                     System.out.println(h);
                     try {
-                        OtherAviary_temp = new OtherAviary(this.bird, this.bird_name);
+                        otherAviary = new OtherAviary(this.bird, this.bird_name);
                         birdAviaryAssignment_map.put(this.bird_name, new ArrayList<String>());
-                        birdAviaryAssignment_map.get(this.bird_name).add(OtherAviary_temp.GetAviaryAssignment());
-                        birdAviaryAssignment_map.get(this.bird_name).add(OtherAviary_temp.GetLocation());
+                        birdAviaryAssignment_map.get(this.bird_name).add(otherAviary.GetAviaryAssignment());
+                        birdAviaryAssignment_map.get(this.bird_name).add(otherAviary.GetLocation());
                         Count_otherBirds++;
                     } catch (Exception i) {
                         System.out.println(i);
@@ -86,14 +88,16 @@ public class Conservatory {
     }
 
     //Guest look up which aviary a bird is in
-    public String SearchAviaryAssignment() {
-        return this.bird_name + birdAviaryAssignment_map.get(this.bird_name);
+    public ArrayList<String> SearchAviaryAssignment() {
+        return birdAviaryAssignment_map.get(this.bird_name);
     }
 
     //Print an index that lists all birds in the conservatory in alphabetical order and their location
     public static Map<String, ArrayList<String>> GetBirdIndex() {
+
         TreeMap<String, ArrayList<String>> sorted_birdAssignment_map = new TreeMap<>();
         sorted_birdAssignment_map.putAll(birdAviaryAssignment_map);
+
         return sorted_birdAssignment_map;
     }
 
@@ -103,39 +107,46 @@ public class Conservatory {
     }
 
     //Setter for location of aviary
-    public void SetLocation(String locationHolder) {
-        location = locationHolder;
+    public void SetLocation(String location) {
+        this.location = location;
     }
 
     //Getter for location of aviary
     public String GetLocation() {
-        return location;
+        return this.location;
     }
 
     //Calculate what food needs to be kept and in what quantities
     public static String CalculateFood() {
         return "small mammals, fish: " + Count_birdsOfPrey +
                 "\nvegetation, larvae: " + Count_flightlessBirds +
-                "\nsmall mammals, buds " + "nuts, vegetation, buds " + "fish, larvae " + Count_otherBirds +
-                "\nfish, larvae" + Count_waterFowl;
+                "\nsmall mammals, buds, " + "nuts, vegetation, buds, " + "fish, larvae: " + Count_otherBirds +
+                "\nfish, larvae: " + Count_waterFowl;
     }
 
     //Create a “map” that lists all the aviaries by location and the birds they house
     //@params map_aviary_bird       dictionary to hold aviary:bird
     //@params map_aviary_location   dictionary to hold aviary:location
-    public void Set_map_aviary_bird(String tempHolder) {
-        if (map_aviary_bird.get(tempHolder) == null) {
-            map_aviary_bird.put(tempHolder, new ArrayList<String>());
+    public void Set_map_aviary_bird(String aviary) {
+
+        if (map_aviary_bird.get(aviary) == null) {
+            map_aviary_bird.put(aviary, new ArrayList<String>());
         }
-        map_aviary_bird.get(tempHolder).add(bird.GetName());
-        map_aviary_location.put(tempHolder, location);
+
+        map_aviary_bird.get(aviary).add(bird.GetName());
+        map_aviary_location.put(aviary, this.location);
     }
 
     //Print a “map” that lists all the aviaries by location and the birds they house
-    public static void GetMap() {
-        System.out.println(map_aviary_bird);
-        System.out.println(map_aviary_location);
+    //@params map_aviary_location_bird      dictionary to hold aviary:location:birds
+    public static Map<String, ArrayList<String>> GetMap() {
+
+        for (String aviary : map_aviary_location.keySet()) {
+            map_aviary_location_bird.put(aviary, new ArrayList<String>());
+            map_aviary_location_bird.get(aviary).add(map_aviary_location.get(aviary).toString());
+            map_aviary_location_bird.get(aviary).add(map_aviary_bird.get(aviary).toString());
+        }
+
+        return map_aviary_location_bird;
     }
-
-
 }

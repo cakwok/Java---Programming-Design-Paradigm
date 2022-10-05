@@ -7,7 +7,6 @@ Child class FlightlessAviary to assign flightless birds into aviary, put max num
 Provide description of the aviary
  */
 import java.util.*;
-
 public class FlightlessAviary extends Conservatory{
     private static int occupancy = 0;
     private static int aviaryNum = 0;
