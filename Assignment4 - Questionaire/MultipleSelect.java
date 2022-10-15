@@ -2,6 +2,7 @@ package questions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class MultipleSelect extends AbstractQuestion {
     String[] options;
@@ -22,12 +23,13 @@ public class MultipleSelect extends AbstractQuestion {
 
     }
 
-
     @Override
     public String answer(String answer) {
-        if (answer.trim().split("\\s+") == this.answer.trim().split("\\s+")) {
+
+        if (answer.replace(" ", "").equals(this.answer.replace(" ", ""))) {
             return "Correct";
         }
+
         return "Incorrect";
     }
 

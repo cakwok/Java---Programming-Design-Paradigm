@@ -15,11 +15,7 @@ public class MultipleChoice extends AbstractQuestion {
             throw new IllegalArgumentException("Enter at least 3 parameters up to 8");
         }
 
-        if (Integer.parseInt(this.options[0]) != 1) {
-            throw new IllegalArgumentException("Option number has to start at 1");
-        }
-
-        if (!Arrays.asList(this.options).contains(this.answer)) {
+        if (Integer.parseInt(this.answer) > this.options.length) {
             throw new IllegalArgumentException("Choose an answer from the options");
         }
 
