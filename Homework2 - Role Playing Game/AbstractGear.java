@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractGear implements Gear {
 
@@ -6,6 +7,8 @@ public abstract class AbstractGear implements Gear {
     protected int defenseStrength;
 
     protected int attackPower;
+    private List<Gear> gear_list;
+    protected String gearCombined;
 
     @Override
     public String GetGearName() {
@@ -18,4 +21,15 @@ public abstract class AbstractGear implements Gear {
     public int GetAttack() {
         return this.attackPower;
     }
+
+    public abstract String GetGear(String gear);
+
+    public abstract String GetGear(List<Gear> gear_list, Gear gear);
+
+    /*
+    public abstract int compareTo(HeadGear headgear);
+    public abstract int compareTo(HandGear handgear);
+    public abstract int compareTo(FootWear footwear);
+
+     */
 }
