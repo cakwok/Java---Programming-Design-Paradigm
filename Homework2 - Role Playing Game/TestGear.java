@@ -1,19 +1,19 @@
+/*
+CS5010 Homework2 - Role Playing Games
+Wing Man, Kwok
+Oct 25 2022
+ */
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
+import static org.junit.Assert.*; 
 
-import static org.junit.Assert.*;
-
+//Testing class to test creation of gear inventory, creation of characters, equip gear, creation of battle
 public class TestGear {
-
-    private Gear gear;
-    private Character character;
 
     //Test creating objects for head gear, hand gear, footwear
     @org.junit.Test
     public void TestCreatingWeapons() {
-
         Gear metalic_helmet1 = new HeadGear(new String[]{"Scurrying", "Sandals"}, 10);
         assertEquals("Scurrying Sandals", metalic_helmet1 .GetGearName());
         assertEquals(10, metalic_helmet1.GetDefense());
@@ -33,7 +33,6 @@ public class TestGear {
     //Test creating characters and equipping weapons
     @org.junit.Test
     public void TestCreatingCharacter() {
-
         Gear metalic_helmet1 = new HeadGear(new String[]{"Metalic", "Helmet"}, 10);
         Gear tricky_glove1 = new HandGear(new String[]{"Tricky", "Glove"}, 10, 10);
         Gear magical_hand = new HandGear(new String[]{"Magical", "Hand"}, 10, 10);
@@ -86,7 +85,7 @@ public class TestGear {
         Gear metalic_sneaker = new FootWear(new String[]{"Metalic", "Sneaker"}, 10, 10);
 
         List<Gear> gear_list = new ArrayList<>();
-        gear_list.add(beautiful_hat);
+        //gear_list.add(beautiful_hat);
         gear_list.add(wooden_helmet1);
         gear_list.add(metalic_helmet1);
         gear_list.add(golden_shield);
@@ -102,11 +101,6 @@ public class TestGear {
         Character character2 = new Character("character2", 10, 10);
 
         Battle battle1 = new Battle(character1, character2, gear_list);
-
-        for (int i = 0; i <5; i++) {
-            battle1.GetEquipment(character1);
-            battle1.GetEquipment(character2);
-        }
-        battle1.toString();
+        battle1.Play();
     }
 }

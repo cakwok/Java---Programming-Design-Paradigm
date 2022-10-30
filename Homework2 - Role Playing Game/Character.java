@@ -1,8 +1,27 @@
-import java.sql.Array;
+/*
+CS5010 Homework2 - Role Playing Games
+Wing Man, Kwok
+Oct 25 2022
+ */
 import java.util.ArrayList;
 import java.util.List;
 
+//Character class to define character base attack power, base defense strength, holder of gear inventory a character hold
 public class Character {
+
+    /*
+    @params baseAttackPower         character base attack power
+    @params baseDefenseStrength     character base defense strength
+    @params attackPower             total attack power upon equipped gear
+    @params defenseStrength         total defense strength upon equipped gear
+    @params headGear                hold current head gear inventory
+    @params handGear                hold current hand gear inventory
+    @params footWear                hold current foot wear inventory
+    @params headGear_combined       hold combined head gear inventory
+    @params handGear_combined       hold combined hand gear inventory
+    @params footWear_combined       hold combined foot wear inventory
+    @params characterName           hold character name
+     */
     private final int baseAttackPower;
     private final int baseDefenseStrength;
     private  int attackPower;
@@ -15,6 +34,7 @@ public class Character {
     private String footWear_combined;
     private String characterName;
 
+    //constructor
     public Character(String characterName, int baseAttackPower, int baseDefenseStrength) {
         if (baseAttackPower < 0 || baseDefenseStrength < 0) {
             throw new IllegalArgumentException("Value must be bigger than or equal to 0");
@@ -41,11 +61,13 @@ public class Character {
         this.footWear_combined = "Empty FootWear";
     }
 
+    //to equip a gear and return total defense strength and attack power
     public void EquipGear(Gear gear) {
 
         try {
             if (gear.getClass().equals(HeadGear.class)){
                 this.headGear_combined = gear.GetGear(this.headGear_combined);
+                this.headGear = gear;
             }
             else if (gear.getClass().equals(HandGear.class)) {
                 this.handGear_combined = gear.GetGear(this.handGear, gear);
@@ -54,7 +76,7 @@ public class Character {
                 this.footWear_combined = gear.GetGear(this.footWear, gear);
             }
 
-            this.defenseStrength +=  + gear.GetDefense();
+            this.defenseStrength +=  gear.GetDefense();
             this.attackPower += gear.GetAttack();
 
         } catch (Exception f) {
@@ -62,12 +84,17 @@ public class Character {
         }
     }
 
+    //to return character attack power
     public int GetAttackPower() {
         return this.attackPower;
     }
+
+    //to return character defense strength
     public int GetDefenseStrength() {
         return this.defenseStrength;
     }
+
+    //to return character equipped status
     @Override
     public String toString() {
 
