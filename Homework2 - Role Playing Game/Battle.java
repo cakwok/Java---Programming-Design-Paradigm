@@ -16,19 +16,20 @@ public class Battle {
     @params previousCharacter   hold value of previous character to ensure character take turn to equip
     @params gear_list           hold a gear list of 10 items to let character equip
     @params i                   pointer of equipment list item position
+    @params numGear             number of gears desired for gear list
      */
     Character character1;
     Character character2;
     Character previousCharacter;
     private List<Gear> gear_list;
     private int i;
-
+    private final int numGear = 10;
     //constructor
     public Battle(Character character1, Character character2, List<Gear> gear_list) {
         if (character1 == character2) {
             throw new IllegalArgumentException("Characters cannot be the same");
         }
-        if (gear_list.size() != 10) {
+        if (gear_list.size() != numGear) {
             throw new IllegalArgumentException("Enter 10 items to choose from");
         }
         this.character1 = character1;
@@ -40,7 +41,7 @@ public class Battle {
 
     //start battle, let character take turn to equip, print result of the battle
     public void Play() {
-        for (int i = 0; i <5; i++) {
+        for (int i = 0; i < numGear/2; i++) {
             GetEquipment(character1);
             GetEquipment(character2);
         }

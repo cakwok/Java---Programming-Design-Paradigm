@@ -80,6 +80,7 @@ public class Character {
             this.attackPower += gear.GetAttack();
 
         } catch (Exception f) {
+            System.out.println(f);
             throw f;
         }
     }
